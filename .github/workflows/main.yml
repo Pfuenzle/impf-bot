@@ -15,9 +15,6 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: echoho
-        run: echo ${{ secrets.DOCKERHUB_USERNAME }}${{ secrets.DOCKERHUB_TOKEN }}_${GITHUB_SHA}
       - 
         name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
@@ -27,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: pfuenzle/impf-bot:${GITHUB_REF#refs/heads/}.${GITHUB_SHA}
+          tags: pfuenzle/impf-bot:${GITHUB_SHA}
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
