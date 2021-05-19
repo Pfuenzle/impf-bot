@@ -8,6 +8,8 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      SHA8: ${GITHUB_SHA::8}
     steps:
       -
         name: Set up QEMU
@@ -24,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: pfuenzle/impf-bot:${GITHUB_SHA}
+          tags: pfuenzle/impf-bot:$SHA8
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
