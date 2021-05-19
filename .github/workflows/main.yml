@@ -20,6 +20,12 @@ jobs:
       - 
         name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      -
+        name: clone
+        run: git clone https://github.com/Pfuenzle/impf-bot
+      -
+        name: move
+        run: mv impf-bot/* .
       - 
         name: Build latest
         run: docker build -t pfuenzle/impf-bot:latest .
